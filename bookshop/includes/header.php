@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?= isset($pageTitle) ? h($pageTitle) . ' – ' : '' ?>Pageturner Books</title>
+<title><?= isset($pageTitle) ? h($pageTitle) . ' – ' : '' ?>Vintage Bookstore</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col">
 
 <header class="bg-stone-900 text-stone-100 shadow">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-    <a href="index.php" class="text-xl font-serif font-bold tracking-wide">📚 Pageturner Books</a>
+    <a href="index.php" class="text-xl font-serif font-bold tracking-wide">📚 Vintage Bookstore</a>
 
     <nav class="flex items-center gap-6 text-sm">
       <a href="index.php" class="hover:text-amber-400">Shop</a>
