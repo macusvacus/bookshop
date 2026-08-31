@@ -1,0 +1,52 @@
+# docker-compose defines and connects multiple containers at once.
+# Run `docker-compose up` and both of these start together, already
+# able to talk to each other.
+
+services:
+
+  # --- Your PHP website ---
+  web:
+    build: .                  # build using the Dockerfile in this folder
+    ports:
+      - "8000:80"              # visit localhost:8000 on your computer -> port 80 inside the container
+    volumes:
+      - .:/var/www/html        # live-sync this folder into the container, so edits show up instantly
+    environment:
+      # "db" here is the other container's service name below — Docker lets
+      # containers reach each other by service name instead of an IP address.
+      DB_HOST: db
+      DB_NAME: bookshop
+      DB_USER: bookshop_user
+      DB_PASS: bookshop_pass
+    depends_on:
+      - db                     # don't start the site until the database container is ready
+
+  # --- MySQL database ---
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: bookshop
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: bookshop_user
+      MYSQL_PASSWORD: bookshop_pass
+    ports:
+      - "3307:3306"    # 3307 on your PC -> 3306 inside the container.
+                        # Changed from 3306:3306 because port 3306 was
+                        # already taken by another MySQL install on this PC.
+    volumes:
+      - db_data:/var/lib/mysql                                # keeps your data even if the container restarts
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql  # auto-runs on first startup
+
+  # --- phpMyAdmin, so you can browse the DB visually like you did on InfinityFree ---
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+volumes:
+  db_data:

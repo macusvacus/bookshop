@@ -1,0 +1,39 @@
+name: Deploy to InfinityFree
+
+# Runs automatically every time you push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ftp-deploy:
+    name: Upload to InfinityFree via FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: grab your repo's code onto GitHub's temporary runner machine
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: upload everything to InfinityFree over FTP
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # InfinityFree serves your site from htdocs, so everything from
+          # the repo root needs to land inside htdocs/ on the server.
+          server-dir: /htdocs/
+          # Never upload local-only files: real credentials, git internals,
+          # Docker files (irrelevant on InfinityFree), and uploaded book covers
+          # (those should stay only on the live server, not be overwritten).
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/config/db.php
+            **/uploads/**
+            **/Dockerfile
+            **/docker-compose.yml
+            **/node_modules/**

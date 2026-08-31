@@ -1,0 +1,10 @@
+# Don't commit real credentials or user-uploaded content
+config/db.php
+uploads/*
+!uploads/.htaccess
+!uploads/.gitkeep
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.vscode/
