@@ -23,7 +23,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          #So it reads server: ..., username: ..., password: ..., local-dir: ./bookshop/, server-dir: /htdocs/
           # InfinityFree serves your site from htdocs, so everything from
           # the repo root needs to land inside htdocs/ on the server.
           server-dir: /htdocs/
