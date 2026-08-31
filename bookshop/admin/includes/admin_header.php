@@ -18,6 +18,8 @@ requireAdminLogin();
     <a href="dashboard.php" class="block px-3 py-2 rounded hover:bg-stone-800">Dashboard</a>
     <a href="books_list.php" class="block px-3 py-2 rounded hover:bg-stone-800">Manage Books</a>
     <a href="add_book.php" class="block px-3 py-2 rounded hover:bg-stone-800">Add New Book</a>
+    <a href="import_csv.php" class="block px-3 py-2 rounded hover:bg-stone-800">Bulk Import (CSV)</a>
+    <a href="import_api.php" class="block px-3 py-2 rounded hover:bg-stone-800">Fetch Books Online</a>
     <a href="orders.php" class="block px-3 py-2 rounded hover:bg-stone-800">Orders</a>
     <a href="logout.php" class="block px-3 py-2 rounded hover:bg-red-700 mt-4">Logout</a>
   </nav>
