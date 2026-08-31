@@ -1,10 +1,33 @@
-name:Debug FTP connection env:
-    FTP_SERVER: ${{ secrets.FTP_SERVER }}
-    FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-    FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-  run: |
-    sudo apt-get update && sudo apt-get install -y lftp
-    echo "Listing remote home:"
-    lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER" -e "pwd; ls -la; exit"
-    echo "Trying to create test dir and list it:"
-    lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER" -e "mkdir test-deploy-dir || true; cd test-deploy-dir || true; pwd; ls -la; rmdir test-deploy-dir || true; exit"
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy files via FTP
+        run: |
+          sudo apt-get update && sudo apt-get install -y lftp
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER" << EOF
+          # Navigate to admin directory
+          cd admin
+          
+          # Upload import_api.php
+          put bookshop/admin/import_api.php -o import_api.php
+          
+          # List files to verify upload
+          ls -la
+          
+          exit
+          EOF
