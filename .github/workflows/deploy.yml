@@ -23,7 +23,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          create-mask: 0777  # Add this line to create missing directories
+          create-mask: 0777 
+          file-permissions: 0644
+          dir-permissions: 0755 
+          # Add this line to create missing directories
           # InfinityFree serves your site from htdocs, so everything from
           # the repo root needs to land inside htdocs/ on the server.
           server-dir: /htdocs/
