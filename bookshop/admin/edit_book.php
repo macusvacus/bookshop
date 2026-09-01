@@ -74,7 +74,7 @@ require 'includes/admin_header.php';
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <label class="block text-sm font-medium mb-1">Price ($)</label>
+      <label class="block text-sm font-medium mb-1">Price (Ksh)</label>
       <input type="number" step="0.01" min="0.01" name="price" value="<?= h($book['price']) ?>" required class="w-full border border-stone-300 rounded px-3 py-2">
     </div>
     <div>

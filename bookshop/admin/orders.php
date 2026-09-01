@@ -15,7 +15,7 @@ require 'includes/admin_header.php';
       <tr>
         <th class="p-3">#</th>
         <th class="p-3">Customer</th>
-        <th class="p-3">Email</th>
+        <th class="p-3">Phone</th>
         <th class="p-3">Total</th>
         <th class="p-3">Status</th>
         <th class="p-3">Date</th>
@@ -26,7 +26,7 @@ require 'includes/admin_header.php';
         <tr>
           <td class="p-3">#<?= $order['id'] ?></td>
           <td class="p-3"><?= h($order['customer_name']) ?></td>
-          <td class="p-3"><?= h($order['email']) ?></td>
+          <td class="p-3"><?= h($order['phone']) ?></td>
           <td class="p-3 font-semibold"><?= money($order['total']) ?></td>
           <td class="p-3"><span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-xs"><?= h($order['status']) ?></span></td>
           <td class="p-3 text-stone-500"><?= h($order['created_at']) ?></td>
