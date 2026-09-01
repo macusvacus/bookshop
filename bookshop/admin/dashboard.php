@@ -23,7 +23,7 @@ require 'includes/admin_header.php';
   </div>
   <div class="bg-white rounded-lg shadow-sm p-5">
     <p class="text-stone-500 text-sm">Revenue</p>
-    <p class="text-2xl font-bold"><?= money($revenue) ?></p>
+    <p class="text-2xl font-bold"><?= money(ksh($revenue)) ?></p>
   </div>
   <div class="bg-white rounded-lg shadow-sm p-5">
     <p class="text-stone-500 text-sm">Low Stock</p>
