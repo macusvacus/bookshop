@@ -8,9 +8,9 @@ function h($string) {
     return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8');
 }
 
-// Format a price consistently everywhere: 12.5 -> "$12.50"
+// Format a price consistently everywhere: 12.5 -> "Ksh12.50"
 function money($amount) {
-    return '$' . number_format((float)$amount, 2);
+    return 'Ksh' . number_format((float)$amount, 2);
 }
 
 // True if an admin is currently logged in
